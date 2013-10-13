@@ -1,0 +1,32 @@
+@import "common";
+@import "layout";
+
+@mixin press-button($bg-color, $fg-color) {
+  font-size: $font-size;
+  padding: 0.5em;
+  margin: 0.1em 0 0 0;
+  border: 0.1em solid darken($bg-color, 10%);
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  background-color: $bg-color;
+  color: $fg-color;
+  border-radius: 0.3em;
+  text-shadow: 0.1em 0.1em invert($fg-color);
+  font-weight: bold;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.press-right.button + .press-right.button {
+  margin-right: 0.5em;
+}
+
+.press-left.button + .press-left.button {
+  margin-left: 0.5em;
+}
+
+
+/* vim: set sw=2 sts=2 : */
