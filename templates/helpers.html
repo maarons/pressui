@@ -1,0 +1,11 @@
+{% macro press_stylesheets(paths) %}
+  {% for path in paths %}
+    <link rel="stylesheet" href="{{ path }}" type="text/css">
+  {% endfor %}
+{% endmacro %}
+
+{% macro press_stylesheet(path) %}
+  {{ press_stylesheets([path]) }}
+{% endmacro %}
+
+<!-- vim: set filetype=jinja sw=2 sts=2 : -->
