@@ -8,4 +8,9 @@
   {{ press_stylesheets([path]) }}
 {% endmacro %}
 
+{% macro press_prefetch(url) %}
+  <link rel="prefetch" href="{{ url }}">
+  <link rel="prerender" href="{{ url }}">
+{% endmacro %}
+
 <!-- vim: set filetype=jinja sw=2 sts=2 : -->
