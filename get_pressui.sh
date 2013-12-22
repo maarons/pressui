@@ -23,4 +23,11 @@ else
 fi
 
 # Update this script
-cp "${DEST}/get_pressui.sh" "${CUR}/.get_pressui.sh" || exit 1
+diff "${DEST}/get_pressui.sh" "${CUR}/.get_pressui.sh" &> /dev/null
+IS_DIFFERENT=$?
+
+if [[ $IS_DIFFERENT -ne 0 ]]; then
+    echo 'Getting new .get_pressui.sh and running it again'
+    cp "${DEST}/get_pressui.sh" "${CUR}/.get_pressui.sh" || exit 1
+    ${DEST}/get_pressui.sh || exit 1
+fi
