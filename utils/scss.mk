@@ -1,7 +1,7 @@
 PRESS_SCSS=$(shell find -L . -type f -name \*.scss)
 
 %.css : %.scss
-	sass $(@:.css=.scss) $@
+	sass --style compressed $(@:.css=.scss) $@
 
 # Usage:
 #
