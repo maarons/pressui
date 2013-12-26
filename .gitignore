@@ -1,2 +1,4 @@
 /.sass-cache
 *.css
+*.py[co]
+__pycache__

@@ -12,6 +12,7 @@
     <div id="fb-root"></div>
     {% block press_content %}{% endblock %}
     {% block press_script %}{% endblock %}
+    {{ press_get_javascript_file() | safe }}
   </body>
 </html>
 
