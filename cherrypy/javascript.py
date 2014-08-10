@@ -9,13 +9,26 @@ def press_javascript(path):
     cherrypy.request.press_javascript.append(abspath(path))
     return ""
 
+def press_jsx(path):
+    cherrypy.request.press_javascript_is_jsx = True
+    return press_javascript(path)
+
 def press_get_javascript_file():
     if not hasattr(cherrypy.request, "press_javascript"):
         return ""
 
-    paths = cherrypy.request.press_javascript
+    script_type = "text/javascript"
+    paths = []
+    if getattr(cherrypy.request, "press_javascript_is_jsx", False):
+        script_type = "text/jsx"
+        paths.append(abspath("PressUI/templates/jsx.js"))
+
+    paths.extend(cherrypy.request.press_javascript)
     dig = static.press_static_file(paths)
-    return "<script src='/all.js/?dig={}'></script>".format(dig)
+    return "<script type='{}' src='/all.js/?dig={}'></script>".format(
+        script_type,
+        dig,
+    )
 
 @cherrypy.tools.allow(methods = ["GET"])
 @cherrypy.expose

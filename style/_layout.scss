@@ -8,6 +8,10 @@ body {
   margin: 1em;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 @media (min-width: 50em) {
   body {
     width: 50em;
@@ -30,6 +34,10 @@ body {
 
 .press-clear {
   clear: both;
+}
+
+.press-wide {
+  width: 100%;
 }
 
 /* vim: set sw=2 sts=2 : */

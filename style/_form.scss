@@ -1,8 +1,8 @@
 @import "common";
 
-@mixin press-form($label-width, $entry-width) {
+.press-form {
   label {
-    width: $label-width;
+    width: 10em;
     display: inline-block;
     line-height: $font-size;
     /* input margin + padding + border */
@@ -11,19 +11,19 @@
 
   input[type=text] {
     line-height: $font-size;
-    @media (min-width: $entry-width) {
-      width: $entry-width;
+    @media (min-width: 40em) {
+      width: 40em;
     }
-    @media (max-width: $entry-width) {
+    @media (max-width: 40em) {
       width: 100%;
     }
   }
 }
 
-@mixin press-input-text($border-color) {
+input[type=search], input[type=text] {
   margin: 0 0 0.5em 0;
   padding: 0.2em;
-  border: 0.2em inset $border-color;
+  border: 0.2em inset $gray1;
   border-radius: 0.3em;
 }
 

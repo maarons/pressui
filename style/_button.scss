@@ -1,18 +1,17 @@
 @import "common";
-@import "layout";
 
-@mixin press-button($bg-color, $fg-color) {
+.press-button {
   font-size: $font-size;
   padding: 0.5em;
   margin: 0.1em 0 0 0;
-  border: 0.1em solid darken($bg-color, 10%);
+  border: 0.1em solid darken($blue, 10%);
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  background-color: $bg-color;
-  color: $fg-color;
+  background-color: $blue;
+  color: white;
   border-radius: 0.3em;
-  text-shadow: 0.1em 0.1em invert($fg-color);
+  text-shadow: 0.1em 0.1em invert(white);
   font-weight: bold;
 
   &.hide {
@@ -20,11 +19,11 @@
   }
 }
 
-.press-right.button + .press-right.button {
+.press-right.press-button + .press-right.press-button {
   margin-right: 0.5em;
 }
 
-.press-left.button + .press-left.button {
+.press-left.press-button + .press-left.press-button {
   margin-left: 0.5em;
 }
 

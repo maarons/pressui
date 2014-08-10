@@ -4,7 +4,7 @@ from time import time
 from threading import Lock
 from os.path import getmtime, abspath
 
-from PressUI.cherrypy.common import press_is_production
+import PressUI.cherrypy.PressProduction as PressProduction
 
 __lock = Lock()
 # { paths sha1 => { "timestamp" => created timestamp, "dig" => file sha1 }
@@ -37,7 +37,7 @@ def press_static_file(paths):
 
 def __should_rebuild(pdig, paths):
     if pdig in __stamps:
-        if press_is_production():
+        if PressProduction.is_production():
             return False
         max_m_time = max([getmtime(path) for path in paths])
         return max_m_time > __stamps[pdig]["timestamp"]
@@ -51,4 +51,4 @@ def press_get_static_file_by_dig(dig, content_type):
         cherrypy.response.headers["ETag"] = dig
         return __contents[dig]
     else:
-        return None
+        raise cherrypy.HTTPError(404)
