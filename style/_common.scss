@@ -1,9 +1,19 @@
 $font-size: 16px;
 
-$gray1: #F2F7FC; /* light */
-$gray2: #EDEFF4; /* medium */
-$gray3: #D9D9D9; /* dark */
-$blue: #5B74A8;
-$light-blue: #3B5998;
+/* http://www.google.com/design/spec/style/color.html#color-color-palette */
+
+$white: #FFFFFF;
+$black: #000000;
+
+$blue100: #BBDEFB;
+$blue500: #2196F3;
+$blue700: #1976D2;
+
+$yellowA100: #FFFF8D;
+$yellowA200: #FFFF00;
+$yellowA400: #FFEA00;
+$yellowA700: #FFD600;
+
+$indigo900: #1A237E;
 
 /* vim: set sw=2 sts=2 : */

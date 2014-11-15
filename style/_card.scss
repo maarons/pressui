@@ -1,0 +1,9 @@
+@import "common";
+
+@mixin press-card {
+  background-color: $blue500;
+  margin: 0.5em 0;
+  color: $white;
+}
+
+/* vim: set sw=2 sts=2 : */

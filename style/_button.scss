@@ -4,15 +4,14 @@
   font-size: $font-size;
   padding: 0.5em;
   margin: 0.1em 0 0 0;
-  border: 0.1em solid darken($blue, 10%);
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  background-color: $blue;
-  color: white;
-  border-radius: 0.3em;
-  text-shadow: 0.1em 0.1em invert(white);
+  background-color: $yellowA400;
+  color: $black;
+  box-shadow: 0 0.1em 0.2em $black;
   font-weight: bold;
+  min-width: 4em;
 
   &.hide {
     display: none;

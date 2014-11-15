@@ -1,11 +1,21 @@
 @import "common";
 
+html {
+  height: 100%;
+}
+
 body {
   font-size: $font-size;
   font-family: sans-serif;
-  background-color: white;
-  color: black;
-  margin: 1em;
+  margin: 0;
+  height: 100%;
+}
+
+.press-body {
+  background-color: $blue100;
+  color: $black;
+  padding: 1em;
+  height: 100%;
 }
 
 html {
@@ -38,6 +48,10 @@ html {
 
 .press-wide {
   width: 100%;
+}
+
+.press-text-hint {
+  opacity: 0.7;
 }
 
 /* vim: set sw=2 sts=2 : */
