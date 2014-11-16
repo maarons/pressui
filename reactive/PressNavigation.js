@@ -31,11 +31,36 @@ var PressNavigation = function() {
   var renderUri = function(uri, params) {
     var controller = uriMap[uri];
     var view = controller(params);
-    if (view !== undefined) {
-      var node = $('#press-root').get(0);
-      React.unmountComponentAtNode(node);
-      React.render(view, node);
+    var toolbar = null;
+    var content = <div></div>;
+    if (view === undefined) {
+      return;
+    } else if (view.toolbar === undefined ||
+               view.content === undefined) {
+      content = view;
+    } else {
+      toolbar = view.toolbar;
+      content = view.content;
     }
+    renderToolbar(toolbar);
+    renderContent(content);
+  }
+
+  var renderToolbar = function(view) {
+    if (view === null) {
+      view = <div></div>;
+    } else {
+      view = <div className='press-toolbar'>{view}</div>;
+    }
+    var node = $('#press-toolbar').get(0);
+    React.unmountComponentAtNode(node);
+    React.render(view, node);
+  }
+
+  var renderContent = function(view) {
+    var node = $('#press-content').get(0);
+    React.unmountComponentAtNode(node);
+    React.render(view, node);
   }
 
   var switchToCurrentUri = function(pushHistoryState) {
@@ -73,6 +98,8 @@ var PressNavigation = function() {
   return {
     setUriMap: setUriMap,
     renderUri: renderUri,
+    renderToolbar: renderToolbar,
+    renderContent: renderContent,
     switchToUri: switchToUri,
     switchToCurrentUri: switchToCurrentUri,
     setHostname: setHostname,

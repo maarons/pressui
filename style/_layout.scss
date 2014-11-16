@@ -11,7 +11,13 @@ body {
   height: 100%;
 }
 
-.press-body {
+.press-toolbar {
+  background-color: $blue700;
+  color: $white;
+  padding: 1em;
+}
+
+#press-content {
   background-color: $blue100;
   color: $black;
   padding: 1em;
