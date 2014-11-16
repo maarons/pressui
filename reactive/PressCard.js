@@ -19,12 +19,16 @@ var PressCard = React.createClass({
     } else {
       var header = null;
     }
+    var content = (
+      <div className='content'>
+        {this.props.content}
+        <div className='press-clear'></div>
+      </div>
+    );
     return (
       <div className={className}>
         {header}
-        <div className='content'>
-          {this.props.content}
-        </div>
+        {content}
       </div>
     );
   }
