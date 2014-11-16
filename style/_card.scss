@@ -1,9 +1,19 @@
 @import "common";
 
-@mixin press-card {
+.press-card {
   background-color: $blue500;
   margin: 0.5em 0;
   color: $white;
+
+  .header {
+    padding: 0.5em;
+  }
+
+  .content {
+    padding: 0.5em;
+    background-color: $white;
+    color: $black;
+  }
 }
 
 /* vim: set sw=2 sts=2 : */

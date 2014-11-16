@@ -34,7 +34,7 @@ var PressNavigation = function() {
     if (view !== undefined) {
       var node = $('#press-root').get(0);
       React.unmountComponentAtNode(node);
-      React.renderComponent(view, node);
+      React.render(view, node);
     }
   }
 
