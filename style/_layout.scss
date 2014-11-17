@@ -18,7 +18,10 @@ body {
 }
 
 #press-content {
-  background-color: $blue100;
+  &:not(:empty) {
+    background-color: $blue100;
+  }
+
   color: $black;
   padding: 1em;
   min-height: 100%;

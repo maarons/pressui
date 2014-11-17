@@ -13,7 +13,7 @@ var PressNavigationButton = React.createClass({
     } else {
       this.props.onClick(this.props.uri, this.props.params);
     }
-    return false;
+    event.preventDefault();
   },
 
   render: function() {
