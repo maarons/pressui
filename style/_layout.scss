@@ -12,14 +12,14 @@ body {
 }
 
 .press-toolbar {
-  background-color: $blue700;
+  background-color: $indigo700;
   color: $white;
   padding: 1em;
 }
 
 #press-content {
   &:not(:empty) {
-    background-color: $blue100;
+    background-color: $indigo100;
   }
 
   color: $black;
