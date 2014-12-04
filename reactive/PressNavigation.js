@@ -12,7 +12,7 @@ var PressNavigation = function() {
     $.each(
       params,
       function(key, value) {
-        uri += sep + key + '=' + encodeURIComponent(value);
+        uri += sep + key + '=' + escapeURI(value);
         sep = '&';
       }
     );
@@ -76,7 +76,7 @@ var PressNavigation = function() {
         paramStrings,
         function(_, paramStr) {
           var splitParamStr = paramStr.split('=');
-          params[splitParamStr[0]] = decodeURIComponent(splitParamStr[1]);
+          params[splitParamStr[0]] = unescapeURI(splitParamStr[1]);
         }
       );
     }
@@ -95,6 +95,14 @@ var PressNavigation = function() {
     return hostname;
   }
 
+  var escapeURI = function(uri) {
+    return encodeURIComponent(uri).replace(/%20/g, '+');
+  }
+
+  var unescapeURI = function(uri) {
+    return decodeURIComponent(uri.replace(/\+/g, ' '));
+  }
+
   return {
     setUriMap: setUriMap,
     renderUri: renderUri,
@@ -104,7 +112,9 @@ var PressNavigation = function() {
     switchToCurrentUri: switchToCurrentUri,
     setHostname: setHostname,
     getHostname: getHostname,
-    paramsToQueryStr: paramsToQueryStr
+    paramsToQueryStr: paramsToQueryStr,
+    escapeURI: escapeURI,
+    unescapeURI: unescapeURI,
   };
 }();
 
