@@ -11,10 +11,15 @@
     <div id='press-content'></div>
     <div id='fb-root'></div>
     <script src='https://connect.facebook.net/en_US/sdk.js'></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/0.12.0/react.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/0.12.0/JSXTransformer.js'></script>
-    <script type='text/jsx' src='/all.js?dig={js_dig}'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/{jquery_version}/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/{react_version}/react.js'></script>
+    <!-- development -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/{react_version}/JSXTransformer.js'></script>
+    <script type='text/jsx' src='/all_jsx.js?dig={js_dig}'></script>
+    <!-- end_development -->
+    <!-- production -->
+    <script type='application/javascript' src='/all.js?dig={js_dig}'></script>
+    <!-- end_production -->
   </body>
 </html>
 

@@ -12,7 +12,7 @@ __stamps = {}
 # { file sha1 => file contents }
 __contents = {}
 
-def press_static_file(paths):
+def press_static_file(paths, compile_fun = None):
     global __stamps, __contents
 
     for path in paths:
@@ -28,6 +28,8 @@ def press_static_file(paths):
                     contents.append(f.read())
             contents = b"\n".join(contents)
             dig = hashlib.sha1(contents).hexdigest()
+            if compile_fun is not None:
+                contents = compile_fun(contents)
             __contents[dig] = contents
             __stamps[pdig] = {
                 "timestamp": time(),
