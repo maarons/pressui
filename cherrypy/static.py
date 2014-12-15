@@ -49,7 +49,7 @@ def __should_rebuild(pdig, paths):
 def press_get_static_file_by_dig(dig, content_type):
     if dig in __contents:
         cherrypy.response.headers['content-type'] = content_type
-        add_cache_control_header()
+        add_cache_control_header(years = 1)
         return __contents[dig]
     else:
         raise cherrypy.HTTPError(404)

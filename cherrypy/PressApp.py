@@ -37,17 +37,16 @@ class PressApp():
     def _js_sources(self):
         return []
 
-    def _json(self, output, no_cache = True):
+    def _json(self, output):
         cherrypy.response.headers['content-type'] = 'application/json'
-        if no_cache:
-            cherrypy.response.headers['cache-control'] = 'no-cache'
+        add_cache_control_header()
         return json.dumps(output).encode('utf-8')
 
     @cherrypy.tools.allow(methods = ['GET'])
     @cherrypy.expose
     def favicon_png(self):
         cherrypy.response.headers['content-type'] = 'image/png'
-        add_cache_control_header()
+        add_cache_control_header(years = 1)
         path = os.path.join(dirname(dirname(__file__)), 'FirefoxOS/icon.png')
         with open(path, 'rb') as f:
             return f.read()
@@ -72,7 +71,7 @@ class PressApp():
     @cherrypy.tools.allow(methods = ['GET'])
     @cherrypy.expose
     def default(self, *args, **kwargs):
-        add_cache_control_header()
+        add_cache_control_header(hours = 1)
 
         # Will be added twice but why not.
         js_sources = ['PressUI/reactive/jsx_header.js']
