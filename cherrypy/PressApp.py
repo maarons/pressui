@@ -1,14 +1,17 @@
 from os import listdir
 from os.path import abspath
+from os.path import dirname
 from os.path import isfile
 from os.path import realpath
 import cherrypy
 import json
+import os.path
 import re
 
 from PressUI.cherrypy.react import compile_react
 from PressUI.cherrypy.static import press_get_static_file_by_dig
 from PressUI.cherrypy.static import press_static_file
+from PressUI.utils.browser_cache import add_cache_control_header
 import PressUI.cherrypy.PressProduction as PressProduction
 
 class PressApp():
@@ -34,9 +37,20 @@ class PressApp():
     def _js_sources(self):
         return []
 
-    def _json(self, output):
-        cherrypy.response.headers['Content-Type'] = 'application/json'
+    def _json(self, output, no_cache = True):
+        cherrypy.response.headers['content-type'] = 'application/json'
+        if no_cache:
+            cherrypy.response.headers['cache-control'] = 'no-cache'
         return json.dumps(output).encode('utf-8')
+
+    @cherrypy.tools.allow(methods = ['GET'])
+    @cherrypy.expose
+    def favicon_png(self):
+        cherrypy.response.headers['content-type'] = 'image/png'
+        add_cache_control_header()
+        path = os.path.join(dirname(dirname(__file__)), 'FirefoxOS/icon.png')
+        with open(path, 'rb') as f:
+            return f.read()
 
     # Same as `all_js` but for development.  Diffrerent path to avoid cache
     # problems.
@@ -58,6 +72,8 @@ class PressApp():
     @cherrypy.tools.allow(methods = ['GET'])
     @cherrypy.expose
     def default(self, *args, **kwargs):
+        add_cache_control_header()
+
         # Will be added twice but why not.
         js_sources = ['PressUI/reactive/jsx_header.js']
         for path in listdir('PressUI/reactive'):
