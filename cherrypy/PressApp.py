@@ -51,6 +51,12 @@ class PressApp():
         with open(path, 'rb') as f:
             return f.read()
 
+    @cherrypy.tools.allow(methods = ['GET'])
+    @cherrypy.expose
+    def channel_html(self):
+        add_cache_control_header(years = 1)
+        return '<script src="//connect.facebook.net/en_US/all.js"></script>'
+
     # Same as `all_js` but for development.  Diffrerent path to avoid cache
     # problems.
     @cherrypy.tools.allow(methods = ['GET'])
