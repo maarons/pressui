@@ -5,6 +5,8 @@ import hashlib
 import hmac
 import json
 
+from PressUI.cherrypy.PressConfig import PressConfig
+
 class LoginException(Exception):
     pass
 
@@ -54,3 +56,23 @@ def authenticate(signed_request, fb_app_secret):
             raise LoginException('Request is too old')
 
         return int(data['user_id'])
+
+def safe_access(fn):
+
+    @cherrypy.expose
+    def wrapped(*args, **kwargs):
+        try:
+            cherrypy_authenticate(
+                PressConfig.get('fb_app_id'),
+                PressConfig.get('fb_app_secret'),
+            )
+        except:
+            raise Exception('Access denied')
+
+        allowed_ids = PressConfig.get('fb_allowed_user_ids')
+        if cherrypy.request.fb_user_id not in allowed_ids:
+            raise Exception('Access denied')
+
+        return fn(*args, **kwargs)
+
+    return wrapped
