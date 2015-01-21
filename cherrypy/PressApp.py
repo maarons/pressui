@@ -8,6 +8,7 @@ import json
 import os.path
 import re
 
+from PressUI.cherrypy.PressConfig import PressConfig
 from PressUI.cherrypy.react import compile_react
 from PressUI.cherrypy.static import press_get_static_file_by_dig
 from PressUI.cherrypy.static import press_static_file
@@ -41,6 +42,16 @@ class PressApp():
         cherrypy.response.headers['content-type'] = 'application/json'
         add_cache_control_header()
         return json.dumps(output).encode('utf-8')
+
+    @cherrypy.tools.allow(methods = ['GET'])
+    @cherrypy.expose
+    def fb_login_info_json(self):
+        ret = self._json({
+            'app_id': PressConfig.get('fb_app_id'),
+            'hostname': cherrypy.request.base,
+        })
+        add_cache_control_header(years = 1)
+        return ret
 
     @cherrypy.tools.allow(methods = ['GET'])
     @cherrypy.expose
