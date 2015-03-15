@@ -10,7 +10,7 @@ var PressButton = React.createClass({
   },
 
   render: function() {
-    className = 'press-button';
+    var className = 'press-button';
     if (this.props.className !== undefined) {
       className += ' ' + this.props.className;
     }
