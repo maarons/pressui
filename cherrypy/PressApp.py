@@ -16,7 +16,7 @@ from PressUI.utils.browser_cache import add_cache_control_header
 import PressUI.cherrypy.PressProduction as PressProduction
 
 class PressApp():
-    __JQUERY_VERSION = '2.1.1'
+    __JQUERY_VERSION = '2.1.3'
     __REACT_VERSION = '0.12.0'
 
     def __init__(self):
