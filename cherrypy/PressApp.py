@@ -17,7 +17,7 @@ import PressUI.cherrypy.PressProduction as PressProduction
 
 class PressApp():
     __JQUERY_VERSION = '2.1.3'
-    __REACT_VERSION = '0.12.0'
+    __REACT_VERSION = '0.13.1'
 
     def __init__(self):
         with open('PressUI/reactive/index.html', 'r') as f:
