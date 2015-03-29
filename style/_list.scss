@@ -1,0 +1,27 @@
+@import "common";
+
+.press-list {
+  border-right: 0.2em solid $indigo100;
+  border-left: 0.2em solid $indigo100;
+
+  .press-list-item {
+    &:first-child {
+      border-top: 0.2em solid $indigo500;
+    }
+
+    &:hover, &:focus {
+      background-color: $blue50;
+    }
+
+    display: block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-bottom: 0.2em solid $indigo500;
+    color: $black;
+    font-weight: bold;
+    text-align: center;
+    background-color: $white;
+  }
+}
+
+/* vim: set sw=2 sts=2 : */
