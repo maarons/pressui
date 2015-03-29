@@ -225,6 +225,10 @@ class ParseObj(ParseBase):
         data = json.loads(ret)
         return cls(**data)
 
+    @classmethod
+    def gen(cls, objectId):
+        return ParsePromise(cls.get, objectId)
+
     # override in actual class
     def before_save(self):
         pass
@@ -281,3 +285,7 @@ class ParseObjFB(ParseObj):
         if obj.fb_user_id != cherrypy.request.fb_user_id:
             raise Exception('Unauthorised access')
         return obj
+
+    @classmethod
+    def gen_safe(cls, objectId):
+        return ParsePromise(cls.get_safe, objectId)

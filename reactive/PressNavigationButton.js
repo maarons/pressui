@@ -1,5 +1,10 @@
 var PressNavigationButton = React.createClass({
   render: function() {
-    return <PressNavigationLink className='press-button' {...this.props}/>;
+    var props = $.extend(true, {}, this.props);
+    if (props.className === undefined) {
+      props.className = ' ';
+    }
+    props.className += ' press-button';
+    return <PressNavigationLink {...props}/>;
   }
 });
