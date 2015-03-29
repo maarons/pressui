@@ -1,6 +1,8 @@
 @import "common";
 
 .press-list {
+  margin: 0 0 1em 0;
+
   .press-list-item {
     &:hover, &:focus {
       background-color: $blue50;

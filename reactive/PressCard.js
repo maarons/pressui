@@ -5,7 +5,7 @@ var PressCard = React.createClass({
   },
 
   render: function() {
-    className = 'press-card';
+    var className = 'press-card';
     if (this.props.className !== undefined) {
       className += ' ' + this.props.className;
     }

@@ -1,0 +1,56 @@
+@import "common";
+
+.press-accordion {
+  .press-accordion-element-header {
+    &:hover, &:focus {
+      background-color: $blue50;
+    }
+
+    background-color: $blue100;
+    margin: 0;
+    font-size: $font-size;
+    font-weight: normal;
+    padding: 0.5em;
+  }
+
+  .press-accordion-element-wrap {
+    height: 20em;
+    overflow: auto;
+    padding: 0 1em;
+    visibility: hidden;
+    /* delay when hiding */
+    transition: visibility 0s linear 0.3s;
+  }
+
+  .press-accordion-element-body {
+    margin: 0;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-out, margin 0.3s ease-out;
+  }
+
+  .press-accordion-element.target {
+    .press-accordion-element0header {
+      padding-bottom: 0.7em;
+    }
+
+    .press-accordion-element-body {
+      margin: 0.5em 0;
+      height: 20em;
+      transition: height 0.3s ease-out, margin 0.3s ease-out;
+    }
+
+    .press-accordion-element-wrap {
+      visibility: visible;
+      /* Immediatelly show when making visible */
+      transition: visibility 0s linear;
+    }
+  }
+
+  .press-accordion-element {
+    border: 0.2em solid $grey400;
+    margin-bottom: 0.2em;
+  }
+}
+
+/* vim: set sw=2 sts=2 : */
