@@ -20,9 +20,12 @@ class ParsePromise(threading.Thread):
         self.__kwargs = kwargs
         self.__ret = None
         self.__exception = None
+        self.__request_method = cherrypy.request.method
         self.start()
 
     def run(self):
+        # Request method is set to `GET` outside of the main thread.
+        cherrypy.request.method = self.__request_method
         try:
             self.__ret = self.__fun(*self.__args, **self.__kwargs)
         except Exception as e:
@@ -206,6 +209,9 @@ class ParseObj(ParseBase):
         if not hasattr(self, 'objectId'):
             # create request
             self.objectId = json.loads(ret)['objectId']
+
+    def gen_save(self):
+        return ParsePromise(self.save)
 
     def destroy(self):
         self.before_destroy()
