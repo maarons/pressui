@@ -4,6 +4,11 @@ var PressLoadingAnimation = React.createClass({
   },
 
   render: function() {
-    return <div id={this.props.id}>Loading…</div>;
+    return <img
+      id={this.props.id}
+      height='20'
+      width='20'
+      src='/press_images/throbber.svg'
+    />;
   }
 });

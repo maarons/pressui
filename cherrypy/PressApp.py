@@ -15,6 +15,15 @@ from PressUI.cherrypy.static import press_static_file
 from PressUI.utils.browser_cache import add_cache_control_header
 import PressUI.cherrypy.PressProduction as PressProduction
 
+class _PressImageController():
+    @cherrypy.tools.allow(methods = ['GET'])
+    @cherrypy.expose
+    def throbber_svg(self):
+        cherrypy.response.headers['content-type'] = 'image/svg+xml'
+        add_cache_control_header(years = 1)
+        with open('PressUI/images/throbber.svg', 'rb') as f:
+            return f.read()
+
 class PressApp():
     __JQUERY_VERSION = '2.1.3'
     __REACT_VERSION = '0.13.1'
@@ -110,3 +119,5 @@ class PressApp():
             jquery_version = self.__JQUERY_VERSION,
             react_version = self.__REACT_VERSION,
         ).encode('utf-8')
+
+    press_images = _PressImageController()
