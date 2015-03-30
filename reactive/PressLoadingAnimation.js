@@ -1,6 +1,6 @@
 var PressLoadingAnimation = React.createClass({
   propTypes: {
-    id: React.PropTypes.string.isRequired,
+    id: React.PropTypes.string,
   },
 
   render: function() {

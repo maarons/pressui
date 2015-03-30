@@ -108,6 +108,10 @@ class ParseQuery(ParseBase):
         self.__make_prop(prop, '$lte', value)
         return self
 
+    def contained_in(self, prop, value):
+        self.__make_prop(prop, '$in', value)
+        return self
+
     def matches(self, prop, value, case_insensitive = False):
         self.__make_prop(prop, '$regex', value)
         if case_insensitive:
