@@ -56,3 +56,17 @@ var PressAccordion = React.createClass({
     );
   }
 });
+
+var press_hide_accordion_under_element = function(element) {
+  var node = null;
+  try {
+    node = React.findDOMNode(element);
+  } catch(e) {
+    // This will fail first time the object is rendered;
+  }
+  if (node !== null) {
+    // Hide the open accordion elements.
+    var elements = $(node).find('.press-accordion-element.target');
+    elements.find('.press-accordion-element-header').click();
+  }
+}
