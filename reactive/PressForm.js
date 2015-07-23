@@ -2,7 +2,6 @@ var PressForm = React.createClass({
   propTypes: {
     onSubmit: React.PropTypes.func.isRequired,
     submitLabel: React.PropTypes.string.isRequired,
-    items: React.PropTypes.array.isRequired,
   },
 
   render: function() {
@@ -10,20 +9,14 @@ var PressForm = React.createClass({
     if (this.props.className !== undefined) {
       className += ' ' + this.props.className;
     }
-    var content = $.map(
-      this.props.items,
-      function(item, i) {
-        return <span key={i}>{item}</span>;
-      }
-    );
     return (
       <form
         className={className}
         action='#'
-        onSubmit={this.handleSubmit}
+        onSubmit={this.props.onSubmit}
       >
         <div id='press-form-error'></div>
-        {content}
+        {this.props.children}
         <input
           type='submit'
           className='press-right press-button'
