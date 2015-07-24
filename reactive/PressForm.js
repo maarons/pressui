@@ -1,8 +1,54 @@
 var PressForm = React.createClass({
   propTypes: {
-    onSubmit: React.PropTypes.func.isRequired,
     submitLabel: React.PropTypes.string.isRequired,
+    action: React.PropTypes.string,
+    processData: React.PropTypes.func,
+    onSubmit: React.PropTypes.func,
+    onSuccess: React.PropTypes.func,
+    onError: React.PropTypes.func,
   },
+
+  getInitialState: function() {
+    return {errorMessage: ''};
+  },
+
+  handleSubmit: function(event) {
+    var node = React.findDOMNode(this);
+    var inputs = $(node).find('input');
+    var data = {};
+    $.each(
+      inputs,
+      function(_, input) {
+        input = $(input);
+        if (input.attr('name') !== undefined) {
+          data[input.attr('name')] = input.val();
+        }
+      }
+    );
+    if (this.props.processData !== undefined) {
+      data = this.props.processData(data);
+      var onError = function(ret) {
+        var message = this.props.onError(ret);
+        this.setState({errorMessage: message});
+      }
+      var this_ = this;
+      $.ajax({
+        url: this_.props.action,
+        type: 'POST',
+        data: data,
+        success: function(ret) {
+          if (!this_.props.onSuccess(ret)) {
+            onError(ret);
+          }
+        },
+        error: onError,
+      });
+    } else {
+      this.props.onSubmit(data);
+    }
+    event.preventDefault();
+  },
+
 
   render: function() {
     var className = 'press-form';
@@ -13,9 +59,9 @@ var PressForm = React.createClass({
       <form
         className={className}
         action='#'
-        onSubmit={this.props.onSubmit}
+        onSubmit={this.handleSubmit}
       >
-        <div id='press-form-error'></div>
+        <div>{this.state.errorMessage}</div>
         {this.props.children}
         <input
           type='submit'
