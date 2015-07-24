@@ -14,6 +14,10 @@ var PressFormInput = React.createClass({
     return {value: value};
   },
 
+  componentWillReceiveProps: function(props) {
+    this.setState({value: props.value});
+  },
+
   handleChange: function(event) {
     this.setState({value: event.target.value});
   },
