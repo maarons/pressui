@@ -25,13 +25,13 @@ var PressForm = React.createClass({
         }
       }
     );
+    var this_ = this;
     if (this.props.processData !== undefined) {
       data = this.props.processData(data);
       var onError = function(ret) {
-        var message = this.props.onError(ret);
-        this.setState({errorMessage: message});
+        var message = this_.props.onError(ret);
+        this_.setState({errorMessage: message});
       }
-      var this_ = this;
       $.ajax({
         url: this_.props.action,
         type: 'POST',
