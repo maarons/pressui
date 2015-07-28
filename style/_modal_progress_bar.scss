@@ -1,0 +1,54 @@
+.press-modal-overlay {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.8;
+}
+
+.press-progress-dialog {
+  position: fixed;
+  @media (min-width: 40em) {
+    top: 50%;
+    left: 50%;
+    margin-top: -10em;
+    margin-left: -20em;
+    width: 40em;
+    height: 20em;
+  }
+  @media (max-width: 40em) {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  background-color: $blue100;
+  border: 0.2em solid $grey400;
+  z-index: 1001;
+
+  .press-progress-header {
+    width: 100%;
+    background-color: $blue600;
+    .press-progress-header-text {
+      color: white;
+      font-size: 2em;
+      padding: 1em;
+    }
+  }
+
+  .press-progress {
+    height: 2em;
+    margin: 1em;
+    border: 0.2em solid $grey400;
+    border-radius: 0.3em;
+
+    .press-progress-bar {
+      height: 2em;
+      background-color: $blue600;
+      border-radius: 0.3em;
+    }
+  }
+}
