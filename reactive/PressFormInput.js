@@ -14,6 +14,11 @@ var PressFormInput = React.createClass({
     return {value: value};
   },
 
+  // PUBLIC
+  getValue: function() {
+    return this.state.value;
+  },
+
   componentWillReceiveProps: function(props) {
     this.setState({value: props.value});
   },
