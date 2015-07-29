@@ -9,10 +9,15 @@ var PressForm = React.createClass({
   },
 
   getInitialState: function() {
-    return {errorMessage: ''};
+    return {
+      errorMessage: '',
+      isSubmitting: false,
+      submitProgress: 0,
+    };
   },
 
   handleSubmit: function(event) {
+    this.setState({'isSubmitting': true, 'submitProgress': 0});
     var node = React.findDOMNode(this);
     var inputs = $(node).find('input');
     var data = {};
@@ -28,23 +33,38 @@ var PressForm = React.createClass({
     var this_ = this;
     if (this.props.processData !== undefined) {
       data = this.props.processData(data);
+      this.setState({'submitProgress': 50});
       var onError = function(ret) {
         var message = this_.props.onError(ret);
-        this_.setState({errorMessage: message});
+        this_.setState({
+          'errorMessage': message,
+          'submitProgress': 100,
+        });
+        setTimeout(function() {
+          this_setSTate({'isSubmitting': false});
+        }, 1000);
       }
       $.ajax({
         url: this_.props.action,
         type: 'POST',
         data: data,
         success: function(ret) {
-          if (!this_.props.onSuccess(ret)) {
-            onError(ret);
-          }
+          this_.setState({'submitProgress': 100});
+          setTimeout(function() {
+            this_.setState({'isSubmitting': false});
+            if (!this_.props.onSuccess(ret)) {
+              onError(ret);
+            }
+          }, 1000);
         },
         error: onError,
       });
     } else {
-      this.props.onSubmit(data);
+      this.setState({'submitProgress': 100});
+      setTimeout(function() {
+        this.props.onSubmit(data);
+        this.setState({'isSubmitting': false});
+      }, 1000);
     }
     event.preventDefault();
   },
@@ -55,12 +75,21 @@ var PressForm = React.createClass({
     if (this.props.className !== undefined) {
       className += ' ' + this.props.className;
     }
+    var overlay = null;
+    if (this.state.isSubmitting) {
+      overlay = <PressModalProgressBar
+        title={'Submitting form'}
+        maxValue={100}
+        value={this.state.submitProgress}
+      />;
+    }
     return (
       <form
         className={className}
         action='#'
         onSubmit={this.handleSubmit}
       >
+        {overlay}
         <div>{this.state.errorMessage}</div>
         {this.props.children}
         <input
