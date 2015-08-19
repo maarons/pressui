@@ -29,7 +29,10 @@ var PressNavigation = function() {
   }
 
   var renderUri = function(uri, params) {
-    var controller = uriMap[uri];
+    var controller = press404Controller;
+    if (uri in uriMap) {
+      controller = uriMap[uri];
+    }
     var view = controller(params);
     var toolbar = null;
     var content = <div></div>;
