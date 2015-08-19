@@ -3,6 +3,7 @@ var PressForm = React.createClass({
     submitLabel: React.PropTypes.string.isRequired,
     action: React.PropTypes.string,
     processData: React.PropTypes.func,
+    // Can’t be used with `processData`.
     onSubmit: React.PropTypes.func,
     onSuccess: React.PropTypes.func,
     onError: React.PropTypes.func,
@@ -41,7 +42,7 @@ var PressForm = React.createClass({
           'submitProgress': 100,
         });
         setTimeout(function() {
-          this_setSTate({'isSubmitting': false});
+          this_.setState({'isSubmitting': false});
         }, 1000);
       }
       $.ajax({
@@ -60,11 +61,8 @@ var PressForm = React.createClass({
         error: onError,
       });
     } else {
-      this.setState({'submitProgress': 100});
-      setTimeout(function() {
-        this.props.onSubmit(data);
-        this.setState({'isSubmitting': false});
-      }, 1000);
+      this.setState({'isSubmitting': false});
+      this.props.onSubmit(data);
     }
     event.preventDefault();
   },
